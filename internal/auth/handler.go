@@ -8,7 +8,7 @@ import (
 )
 
 type AuthHandler struct {
-	AuthService AuthService
+	AuthService *AuthService
 }
 
 func (h *AuthHandler) Register(w http.ResponseWriter, r *http.Request) {
