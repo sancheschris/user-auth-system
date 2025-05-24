@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/sancheschris/user-auth-system/internal/model"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -29,7 +30,7 @@ func (r *MongoUserRepository) FindByUsername(username string) (*model.User, erro
 	defer cancel()
 
 	var user model.User
-	err := r.collection.FindOne(ctx, model.User{Username: username}).Decode(&user)
+	err := r.collection.FindOne(ctx, bson.M{"username": username}).Decode(&user)
 	if err != nil {
 		return nil, err
 	}
