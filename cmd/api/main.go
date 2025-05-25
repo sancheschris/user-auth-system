@@ -7,11 +7,14 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/sancheschris/user-auth-system/internal/auth"
+	"github.com/sancheschris/user-auth-system/internal/config"
 	"github.com/sancheschris/user-auth-system/internal/database"
 )
 func main() {
 
-	db, err := database.ConnectMongoDB("mongodb://root:secret@localhost:27017/?authSource=admin")
+	cfg := config.LoadConfig()
+
+	db, err := database.ConnectMongoDB(cfg.MongoURI)
 
 	if err != nil {
 		log.Fatal("Failed to connect to MongoDB:", err)
