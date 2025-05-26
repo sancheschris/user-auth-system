@@ -1,12 +1,13 @@
 package jwt
 
 import (
+	"os"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
 )
 
-var jwtSecret = []byte("your-256-bit-secret")
+var jwtSecret = []byte(os.Getenv("JWT_SECRET"))
 
 func GenerateToken(userID string) (string, error) {
 	claims := jwt.MapClaims{
